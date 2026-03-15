@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c5ys6j7j1fyk4"]
 
-[ext_resource type="PackedScene" uid="uid://bh81fjumb2ngi" path="res://assets/32xPlane.blend" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://bmdpmjg7w4gah" path="res://scenes/32x_wave.tscn" id="1_o5qli"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0wfyh"]
 sky_top_color = Color(0.08627451, 0.08627451, 0.08627451, 1)
@@ -21,12 +21,13 @@ tonemap_mode = 2
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1954523167]
 environment = SubResource("Environment_jyhfs")
 
-[node name="32xPlane" parent="." unique_id=2064663958 instance=ExtResource("1_o5qli")]
-
 [node name="Camera Pivot" type="Node3D" parent="." unique_id=899316682]
 
 [node name="Camera3D" type="Camera3D" parent="Camera Pivot" unique_id=2081496162]
-transform = Transform3D(1, 0, 0, 0, 0.9674138, 0.25320083, 0, -0.25320083, 0.9674138, 0, 2.0799332, 4.3433027)
+transform = Transform3D(1, 0, 0, 0, 0.7959598, 0.60534954, 0, -0.60534954, 0.7959598, 0, 2.0799332, 4.3433027)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1074656912]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.947154, 0)
 light_size = 5.0
+
+[node name="32xWave" parent="." unique_id=1366401393 instance=ExtResource("1_o5qli")]
