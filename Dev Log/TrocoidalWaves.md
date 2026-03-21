@@ -14,10 +14,15 @@ Where W is
 
 Variables
 
+
 A = Amplitude
+
 D (Dx, Dz) = Direction Vector
+
 Q = Steepness
+
 K = Wave Number (Wave Length)
+
 W = Angular Frequency
 
 Result:
