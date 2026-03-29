@@ -1,16 +1,114 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Wave System</title>
-        <meta charset="UTF-8">
-    </head>
-    <body>
-        <h1>Wave System</h1>
-        <canvas id="canvas"></canvas>
-        <script src="index.js"></script>
-        <script>
-            var engine = new Engine({"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":1276280,"index.wasm":35739700},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4});
-            engine.startGame();
-        </script>
-    </body>
+<head>
+    <title>Wave System</title>
+    <meta charset="UTF-8">
+    <style>
+        :root {
+            --primary-color: #2dcee3;
+            --background-color: rgba(52, 52, 52, 0.371);
+            --border-color: #ffffff0c;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #0a0a0a;
+            font-family: monospace, sans-serif;
+            color: #ddd;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin: 0;
+            letter-spacing: 0.1em;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            gap: 15px;
+            min-height: 0;
+        }
+
+        aside {
+            width: 300px;
+            flex-shrink: 0;
+            background-color: var(--background-color);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 16px;
+            overflow-y: auto;
+        }
+
+        #canvas-container {
+            flex: 1;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            background: #111;
+            overflow: hidden;
+            position: relative;
+            min-width: 0;
+        }
+
+        #canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        @media (max-width: 1200px) {
+            main {
+                flex-direction: column;
+            }
+            aside {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Wave System</h1>
+
+    <main>
+        <aside class="rounded">
+            <h2>Properties</h2>
+            <h3>Property 1:</h3>
+            <input type="range" id="property1" min="0" max="100" style="width:100%;">
+        </aside>
+
+        <div id="canvas-container">
+            <canvas id="canvas"></canvas>
+        </div>
+    </main>
+
+    <script src="index.js"></script>
+    <script>
+        const canvas = document.getElementById("canvas");
+        
+        var engine = new Engine({"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":1276280,"index.wasm":35739700},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4});
+
+        engine.startGame({
+            canvas: canvas,                    
+            canvasResizePolicy: 0,             
+        }).then(() => {
+            console.log("Simulação carregada!");
+
+            resizeCanvas();
+
+            window.addEventListener('resize', resizeCanvas);
+        });
+
+        function resizeCanvas() {
+            canvas.width = 1280;
+            canvas.height = 720;
+        }
+    </script>
+</body>
 </html>
