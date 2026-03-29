@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://f6hmpuwdrrqm" path="res://scripts/TrochoidalWave.gd" id="1_fpt0a"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fpt0a"]
+cull_mode = 2
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ynsjc"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_vkpxb"]
@@ -10925,6 +10928,7 @@ bones/1088/rotation = Quaternion(0, 0, 0, 1)
 bones/1088/scale = Vector3(1, 1, 1)
 
 [node name="Plane" type="MeshInstance3D" parent="WaveArmature/Skeleton3D" unique_id=1658680185]
+material_override = SubResource("StandardMaterial3D_fpt0a")
 mesh = SubResource("ArrayMesh_vkpxb")
 skin = SubResource("Skin_u6e6i")
 skeleton = NodePath("..")

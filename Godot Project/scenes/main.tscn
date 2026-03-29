@@ -29,6 +29,8 @@ script = ExtResource("1_0wfyh")
 [node name="Camera3D" type="Camera3D" parent="Camera Pivot" unique_id=2081496162]
 transform = Transform3D(1, 0, 0, 0, 0.7959598, 0.60534954, 0, -0.60534954, 0.7959598, 0, 2.0799332, 2.856492)
 current = true
+fov = 70.0
+size = 10.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1074656912]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.947154, 0)
