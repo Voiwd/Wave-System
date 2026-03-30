@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c5ys6j7j1fyk4"]
 
 [ext_resource type="Script" uid="uid://c0a2fap1lqe81" path="res://scripts/camera_pivot.gd" id="1_0wfyh"]
+[ext_resource type="Script" uid="uid://dixtego4xg8s3" path="res://main.gd" id="1_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://bmdpmjg7w4gah" path="res://scenes/32x_SineWave.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://bu3hrli5hc7p0" path="res://scenes/32x_trochoidal_wave.tscn" id="3_sugp2"]
 
@@ -19,6 +20,7 @@ sky = SubResource("Sky_sugp2")
 tonemap_mode = 2
 
 [node name="main" type="Node3D" unique_id=2018132771]
+script = ExtResource("1_jyhfs")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1954523167]
 environment = SubResource("Environment_jyhfs")
@@ -27,7 +29,7 @@ environment = SubResource("Environment_jyhfs")
 script = ExtResource("1_0wfyh")
 
 [node name="Camera3D" type="Camera3D" parent="Camera Pivot" unique_id=2081496162]
-transform = Transform3D(1, 0, 0, 0, 0.7959598, 0.60534954, 0, -0.60534954, 0.7959598, 0, 2.0799332, 2.856492)
+transform = Transform3D(1, 0, 0, 0, 0.7959598, 0.60534954, 0, -0.60534954, 0.7959598, 0, 3.8959818, 5.2443714)
 current = true
 fov = 70.0
 size = 10.0
@@ -43,3 +45,6 @@ visible = false
 
 [node name="32xTrochoidalWave" parent="." unique_id=1153268050 instance=ExtResource("3_sugp2")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+amplitude = 0.2
+direction = Vector2(0.6, 0.15)
+angular_frequency = 5.0

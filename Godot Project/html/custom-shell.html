@@ -91,14 +91,19 @@
     <script src="$GODOT_URL"></script>
     <script>
         const canvas = document.getElementById("canvas");
-        
-        var engine = new Engine($GODOT_CONFIG);
+        window.GodotBridge = {
+            ping: function() {
+                console.log("Engine Connection Successful!");
+                return "Pong from JS!";
+            }
+        }
 
+        var engine = new Engine($GODOT_CONFIG);
         engine.startGame({
             canvas: canvas,                    
             canvasResizePolicy: 0,             
         }).then(() => {
-            console.log("Simulação carregada!");
+            console.log("Simulation loaded❊");
 
             resizeCanvas();
 
@@ -109,6 +114,8 @@
             canvas.width = 1280;
             canvas.height = 720;
         }
+        
+        
     </script>
 </body>
 </html>

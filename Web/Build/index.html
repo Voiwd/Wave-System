@@ -91,14 +91,19 @@
     <script src="index.js"></script>
     <script>
         const canvas = document.getElementById("canvas");
-        
-        var engine = new Engine({"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":1276280,"index.wasm":35739700},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4});
+        window.GodotBridge = {
+            ping: function() {
+                console.log("Engine Connection Successful!");
+                return "Pong from JS!";
+            }
+        }
 
+        var engine = new Engine({"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":1277104,"index.wasm":35739700},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4});
         engine.startGame({
             canvas: canvas,                    
             canvasResizePolicy: 0,             
         }).then(() => {
-            console.log("Simulação carregada!");
+            console.log("Simulation loaded❊");
 
             resizeCanvas();
 
@@ -109,6 +114,8 @@
             canvas.width = 1280;
             canvas.height = 720;
         }
+        
+        
     </script>
 </body>
 </html>
