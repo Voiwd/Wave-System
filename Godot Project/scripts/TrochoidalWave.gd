@@ -1,4 +1,5 @@
 extends Node3D
+class_name WaveObject
 
 @export var amplitude : float = .3
 @export var direction : Vector2 = Vector2(1, 0).normalized()
