@@ -1,10 +1,12 @@
 # Wave-System
-A study case project exploring wave simulation using Godot and WebGL.
+
+**Wave-System** is a study project focused on wave simulation using **Godot**, **JavaScript**, and **WebGL**.
 
 ## Goals
-- Learn physics, shaders and web development
 
-- Write a detailed dev log
+- Explore physics and dynamic interactions  
+- Experiment with **shaders**
+- Practice web development and deploying interactive projects  
+- Keep a detailed development log (**dev log**)  
 
-- Release a final web demo
-
+> ⚠️ This project is still experimental and not a final product. It's meant for learning and experimentation.
