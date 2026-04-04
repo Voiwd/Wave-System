@@ -4,10 +4,12 @@
     <title>Wave System</title>
     <meta charset="UTF-8">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+        
         :root {
-            --primary-color: #2dcee3;
+            --primary-color: #438afc;
             --background-color: rgba(52, 52, 52, 0.371);
-            --border-color: #ffffff0c;
+            --border-color: #008cff0c;
         }
 
         * { box-sizing: border-box; }
@@ -16,7 +18,7 @@
             margin: 0;
             padding: 20px;
             background-color: #0a0a0a;
-            font-family: monospace, sans-serif;
+            font-family: 'Space Grotesk', monospace, sans-serif;
             color: #ddd;
             height: 100vh;
             display: flex;
@@ -47,6 +49,15 @@
             border-radius: 10px;
             padding: 16px;
             overflow-y: auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="range"] {
+            width: 100%;
         }
 
         #canvas-container {
@@ -100,9 +111,30 @@
 
     <main>
         <aside class="rounded">
-            <h2>Properties</h2>
-            <h3>Property 1:</h3>
-            <input type="range" id="property1" min="0" max="100" style="width:100%;">
+            <form action="" id="VariablesConfig">
+                <h2>Variables</h2>
+                
+                <label for="Amplitude">
+                    Amplitude <br> <input type="range" id="Amplitude" name="amplitude" min="0" max="1" step="0.1" value=".3">
+                </label>
+                <label for="Direction">
+                    Direction (x, z) <br>
+                    <input type="number" name="directionx" id="directionx" min="0" max="1" step="0.05" value="0.6">
+                    <input type="number" name="directionz" id="directionz" min="0" max="1" step="0.05" value="0.15">
+                </label>
+                <label for="Steepness">
+                    Steepness <br> <input type="range" id="Steepness" name="steepness" min="0" max="3" step="0.1" value="0.5">
+                </label>
+                <label for="Wave length">
+                    Wave Length <br> <input type="range" id="WaveLength" name="wavelength" min="1" max="5" step=".2" value="5">
+                </label>
+                <label for="Angular frequency">
+                    Angular Frequency <br> <input type="range" id="AngularFrequency" name="angular_frequency" min="0" max="5" step="0.2" value="3.2">
+                </label>
+                <label for="Phase">
+                    Phase <br> <input type="range" id="Phase" name="phase" min="-3" max="3" step="0.1" value="0">
+                </label>
+            </form>
         </aside>
 
         <div id="canvas-container">
@@ -117,10 +149,37 @@
             ping: function() {
                 console.log("Engine Connection Successful!");
                 return "Pong from JS!";
-            }
-        }
+            },
 
-        var engine = new Engine({"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":1277120,"index.wasm":35749181},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4});
+            setproperties: null, // placeholder for Godot to override
+
+            updateProperties: function(data) {
+                if (this.setproperties) {
+                    this.setproperties(data);
+                } else {
+                    console.warn("setproperties function not defined in GodotBridge.");
+                }
+            }
+        };
+
+        const variablesForm = document.getElementById("VariablesConfig");
+        const inputs = variablesForm.querySelectorAll("input[type='range'], input[type='number']");
+
+        inputs.forEach(input => {
+            input.addEventListener("input", () => {
+                const formData = new FormData(variablesForm);
+                let data = Object.fromEntries(formData.entries());
+
+                for (let key in data) {
+                    data[key] = parseFloat(data[key]);
+                }
+
+                window.GodotBridge.updateProperties( JSON.stringify(data) );
+            });
+        });
+        
+
+        var engine = new Engine({"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":1277728,"index.wasm":35749181},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4});
         engine.startGame({
             canvas: canvas,                    
             canvasResizePolicy: 0,             

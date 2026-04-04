@@ -111,33 +111,30 @@
 
     <main>
         <aside class="rounded">
-            <h2>Variables</h2>
-            
-            <label for="Amplitude">
-                Amplitude <br> <input type="range" id="Amplitude" name="Amplitude" min="0" max="5" step="0.2" value="1">
-            </label>
-
-            <label for="Direction">
-                Direction (x, z) <br>
-                <input type="number" name="x" id="directionX" min="0" max="1" value="0">
-                <input type="number" name="z" id="directionZ" min="0" max="1" value="0">
-            </label>
-
-            <label for="Steepness">
-                Steepness <br> <input type="range" id="Steepness" name="Steepness" min="0" max="1" step="0.1" value="0.5">
-            </label>
-
-            <label for="Wave length">
-                Wave Length <br> <input type="range" id="WaveLength" name="WaveLength" min="0" max="5" step="0.2" value="1">
-            </label>
-
-            <label for="Angular frequency">
-                Angular Frequency <br> <input type="range" id="AngularFrequency" name="AngularFrequency" min="0" max="5" step="0.2" value="1">
-            </label>
-
-            <label for="Phase">
-                Phase <br> <input type="range" id="Phase" name="Phase" min="-3" max="3" step="0.1" value="0">
-            </label>
+            <form action="" id="VariablesConfig">
+                <h2>Variables</h2>
+                
+                <label for="Amplitude">
+                    Amplitude <br> <input type="range" id="Amplitude" name="amplitude" min="0" max="1" step="0.1" value=".3">
+                </label>
+                <label for="Direction">
+                    Direction (x, z) <br>
+                    <input type="number" name="directionx" id="directionx" min="0" max="1" step="0.05" value="0.6">
+                    <input type="number" name="directionz" id="directionz" min="0" max="1" step="0.05" value="0.15">
+                </label>
+                <label for="Steepness">
+                    Steepness <br> <input type="range" id="Steepness" name="steepness" min="0" max="3" step="0.1" value="0.5">
+                </label>
+                <label for="Wave length">
+                    Wave Length <br> <input type="range" id="WaveLength" name="wavelength" min="1" max="5" step=".2" value="5">
+                </label>
+                <label for="Angular frequency">
+                    Angular Frequency <br> <input type="range" id="AngularFrequency" name="angular_frequency" min="0" max="5" step="0.2" value="3.2">
+                </label>
+                <label for="Phase">
+                    Phase <br> <input type="range" id="Phase" name="phase" min="-3" max="3" step="0.1" value="0">
+                </label>
+            </form>
         </aside>
 
         <div id="canvas-container">
@@ -152,8 +149,35 @@
             ping: function() {
                 console.log("Engine Connection Successful!");
                 return "Pong from JS!";
+            },
+
+            setproperties: null,
+
+            updateProperties: function(data) {
+                if (this.setproperties) {
+                    this.setproperties(data);
+                } else {
+                    console.warn("setproperties function not defined in GodotBridge.");
+                }
             }
-        }
+        };
+
+        const variablesForm = document.getElementById("VariablesConfig");
+        const inputs = variablesForm.querySelectorAll("input[type='range'], input[type='number']");
+
+        inputs.forEach(input => {
+            input.addEventListener("input", () => {
+                const formData = new FormData(variablesForm);
+                let data = Object.fromEntries(formData.entries());
+
+                for (let key in data) {
+                    data[key] = parseFloat(data[key]);
+                }
+
+                window.GodotBridge.updateProperties( JSON.stringify(data) );
+            });
+        });
+        
 
         var engine = new Engine($GODOT_CONFIG);
         engine.startGame({
@@ -175,7 +199,7 @@
             let width = container.clientWidth;
             let height = container.clientHeight;
 
-            if (height === 0) return; // evita glitch inicial
+            if (height === 0) return; 
 
             if (width / height > aspect) {
                 width = height * aspect;

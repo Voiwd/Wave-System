@@ -2,9 +2,10 @@ extends Node3D
 class_name WaveObject
 
 @export var amplitude : float = .3
-@export var direction : Vector2 = Vector2(1, 0).normalized()
+@export var directionx : float = .6
+@export var directionz : float = .15
 @export var steepness : float = .35
-@export var wavelength : float = 2     
+@export var wavelength : float = 5     
 @export var angular_frequency : float = 3.2
 @export var phase : float = 0.0
 
@@ -16,12 +17,12 @@ var bone_count = 0
 func _trochoidal_wave(x: float, y: float, z: float, t: float) -> Vector3:
 	var k = 2.0 * PI / wavelength
 	
-	var dot = k * (direction.x * x + direction.y * z)
+	var dot = k * (directionx * x + directionz * z)
 	var W = dot - angular_frequency * t + phase
 	
-	var horizontal_x = x + steepness * amplitude * direction.x * cos(W)
+	var horizontal_x = x + steepness * amplitude * directionx * cos(W)
 	var vertical_y   = amplitude * sin(W)
-	var horizontal_z = z + steepness * amplitude * direction.y * cos(W)
+	var horizontal_z = z + steepness * amplitude * directionz * cos(W)
 	
 	return Vector3(horizontal_x, vertical_y, horizontal_z)
 
