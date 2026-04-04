@@ -22,6 +22,7 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
+            min-height: 100vh;
         }
 
         h1 {
@@ -35,6 +36,7 @@
             display: flex;
             gap: 15px;
             min-height: 0;
+            overflow: auto;
         }
 
         aside {
@@ -54,7 +56,12 @@
             background: #111;
             overflow: hidden;
             position: relative;
+            
             min-width: 0;
+            min-height: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         #canvas {
@@ -64,9 +71,24 @@
         }
 
         @media (max-width: 1200px) {
+            body {
+                overflow: auto;
+            }
+
             main {
                 flex-direction: column;
+                overflow: visible;
             }
+            
+            #canvas-container {
+                height: auto;
+                aspect-ratio: 16 / 9;
+            }
+            #canvas {
+                width: 100%;
+                height: 100%;
+            }
+
             aside {
                 width: 100%;
             }
@@ -98,12 +120,12 @@
             }
         }
 
-        var engine = new Engine({"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":1277104,"index.wasm":35739700},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4});
+        var engine = new Engine({"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":1277120,"index.wasm":35749181},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4});
         engine.startGame({
             canvas: canvas,                    
             canvasResizePolicy: 0,             
         }).then(() => {
-            console.log("Simulation loaded❊");
+            console.log("Engine loaded successfully!");
 
             resizeCanvas();
 
@@ -111,8 +133,26 @@
         });
 
         function resizeCanvas() {
-            canvas.width = 1280;
-            canvas.height = 720;
+            const container = document.getElementById("canvas-container");
+
+            const aspect = 16 / 9;
+
+            let width = container.clientWidth;
+            let height = container.clientHeight;
+
+            if (height === 0) return; // evita glitch inicial
+
+            if (width / height > aspect) {
+                width = height * aspect;
+            } else {
+                height = width / aspect;
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+
+            canvas.style.width = width + "px";
+            canvas.style.height = height + "px";
         }
         
         
