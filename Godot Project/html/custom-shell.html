@@ -7,9 +7,10 @@
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
         
         :root {
-            --primary-color: #438afc;
-            --background-color: rgba(52, 52, 52, 0.371);
+            --background-color: #141f525e;
             --border-color: #008cff0c;
+            --accent-color: #0174ff;
+            --foreground-color: hsl(200, 30%, 4%);
         }
 
         * { box-sizing: border-box; }
@@ -17,7 +18,7 @@
         body {
             margin: 0;
             padding: 20px;
-            background-color: #0a0a0a;
+            background-color: var(--foreground-color);
             font-family: 'Space Grotesk', monospace, sans-serif;
             color: #ddd;
             height: 100vh;
@@ -28,7 +29,7 @@
         }
 
         h1 {
-            color: var(--primary-color);
+            color: var(--accent-color);
             margin: 0;
             letter-spacing: 0.1em;
         }
@@ -44,27 +45,82 @@
         aside {
             width: 300px;
             flex-shrink: 0;
-            background-color: var(--background-color);
+            background: linear-gradient(var(--background-color), #00000035);
             border: 2px solid var(--border-color);
             border-radius: 10px;
             padding: 16px;
             overflow-y: auto;
         }
 
-        label {
-            display: block;
-            margin-bottom: 10px;
+        #VariablesConfig {
+            display: grid;
+            gap: 18px;
         }
 
-        input[type="range"] {
+        #VariablesConfig h2 {
+            margin: 0 0 8px;
+            font-size: 1.2rem;
+            letter-spacing: 0.08em;
+            color: #f5f9ff;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            padding-bottom: 8px;
+        }
+
+        .control-group {
+            display: grid;
+            gap: 10px;
+            padding: 12px 12px 10px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .control-group label {
+            display: block;
+            color: #e5ecff;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .control-group input[type="range"],
+        .control-group input[type="number"] {
             width: 100%;
+            padding: 10px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .control-group input[type="range"] {
+            padding: 0;
+            height: 22px;
+        }
+
+        .control-group input[type="number"] {
+            max-width: 120px;
+            appearance: textfield;
+        }
+
+        .control-group input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(1, 116, 255, 0.12);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .number-pair {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
         }
 
         #canvas-container {
             flex: 1;
             border: 2px solid var(--border-color);
             border-radius: 10px;
-            background: #111;
+            background: var(--foreground-color);
             overflow: hidden;
             position: relative;
             
@@ -77,6 +133,7 @@
 
         #canvas {
             display: block;
+            border-radius: 10px;
             width: 100%;
             height: 100%;
         }
@@ -114,26 +171,33 @@
             <form action="" id="VariablesConfig">
                 <h2>Variables</h2>
                 
-                <label for="Amplitude">
-                    Amplitude <br> <input type="range" id="Amplitude" name="amplitude" min="0" max="1" step="0.1" value=".3">
-                </label>
-                <label for="Direction">
-                    Direction (x, z) <br>
-                    <input type="number" name="directionx" id="directionx" min="0" max="1" step="0.05" value="0.6">
-                    <input type="number" name="directionz" id="directionz" min="0" max="1" step="0.05" value="0.15">
-                </label>
-                <label for="Steepness">
-                    Steepness <br> <input type="range" id="Steepness" name="steepness" min="0" max="3" step="0.1" value="0.5">
-                </label>
-                <label for="Wave length">
-                    Wave Length <br> <input type="range" id="WaveLength" name="wavelength" min="1" max="5" step=".2" value="5">
-                </label>
-                <label for="Angular frequency">
-                    Angular Frequency <br> <input type="range" id="AngularFrequency" name="angular_frequency" min="0" max="5" step="0.2" value="3.2">
-                </label>
-                <label for="Phase">
-                    Phase <br> <input type="range" id="Phase" name="phase" min="-3" max="3" step="0.1" value="0">
-                </label>
+                <div class="control-group">
+                    <label for="Amplitude">Amplitude</label>
+                    <input type="range" id="Amplitude" name="amplitude" min="0" max="1" step="0.1" value=".3">
+                </div>
+                <div class="control-group">
+                    <label for="Direction">Direction (x, z)</label>
+                    <div class="number-pair">
+                        <input type="number" name="directionx" id="directionx" min="0" max="1" step="0.05" value="0.6">
+                        <input type="number" name="directionz" id="directionz" min="0" max="1" step="0.05" value="0.15">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="Steepness">Steepness</label>
+                    <input type="range" id="Steepness" name="steepness" min="0" max="3" step="0.1" value="0.5">
+                </div>
+                <div class="control-group">
+                    <label for="WaveLength">Wave Length</label>
+                    <input type="range" id="WaveLength" name="wavelength" min="1" max="5" step=".2" value="5">
+                </div>
+                <div class="control-group">
+                    <label for="AngularFrequency">Angular Frequency</label>
+                    <input type="range" id="AngularFrequency" name="angular_frequency" min="0" max="5" step="0.2" value="3.2">
+                </div>
+                <div class="control-group">
+                    <label for="Phase">Phase</label>
+                    <input type="range" id="Phase" name="phase" min="-3" max="3" step="0.1" value="0">
+                </div>
             </form>
         </aside>
 
