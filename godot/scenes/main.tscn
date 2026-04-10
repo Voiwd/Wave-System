@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://c0a2fap1lqe81" path="res://scripts/camera_pivot.gd" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://dixtego4xg8s3" path="res://main.gd" id="1_jyhfs"]
-[ext_resource type="PackedScene" uid="uid://bmdpmjg7w4gah" path="res://scenes/32x_SineWave.tscn" id="1_o5qli"]
-[ext_resource type="PackedScene" uid="uid://bu3hrli5hc7p0" path="res://scenes/32x_trochoidal_wave.tscn" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://bmdpmjg7w4gah" path="res://scenes/32x_sinewave.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://bu3hrli5hc7p0" path="res://scenes/32x_trochoidalwave.tscn" id="3_sugp2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0wfyh"]
 sky_top_color = Color(0.08627451, 0.08627451, 0.08627451, 1)
@@ -21,15 +21,15 @@ tonemap_mode = 2
 
 [node name="main" type="Node3D" unique_id=2018132771 node_paths=PackedStringArray("current_wave")]
 script = ExtResource("1_jyhfs")
-current_wave = NodePath("32xTrochoidalWave")
+current_wave = NodePath("32x_trochoidalwave")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1954523167]
 environment = SubResource("Environment_jyhfs")
 
-[node name="Camera Pivot" type="Node3D" parent="." unique_id=899316682]
+[node name="camerapivot" type="Node3D" parent="." unique_id=899316682]
 script = ExtResource("1_0wfyh")
 
-[node name="Camera3D" type="Camera3D" parent="Camera Pivot" unique_id=2081496162]
+[node name="Camera3D" type="Camera3D" parent="camerapivot" unique_id=2081496162]
 transform = Transform3D(1, 0, 0, 0, 0.7959598, 0.60534954, 0, -0.60534954, 0.7959598, 0, 3.8959818, 5.2443714)
 current = true
 fov = 70.0
@@ -40,9 +40,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.947154, 0)
 light_size = 5.0
 omni_range = 10.0
 
-[node name="32xSineWave" parent="." unique_id=1366401393 instance=ExtResource("1_o5qli")]
+[node name="32x_sinewave" parent="." unique_id=1366401393 instance=ExtResource("1_o5qli")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 visible = false
 
-[node name="32xTrochoidalWave" parent="." unique_id=1153268050 instance=ExtResource("3_sugp2")]
+[node name="32x_trochoidalwave" parent="." unique_id=1153268050 instance=ExtResource("3_sugp2")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
