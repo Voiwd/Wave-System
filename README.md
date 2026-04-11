@@ -16,4 +16,6 @@
 - Study web development and deploying interactive projects  
 - Write documentation about the process
 
+For more information see the [docs](https://github.com/Voiwd/WaveSim-godot/tree/main/docs)
+
 > ⚠️ This project is still experimental and not a final product. It's meant for learning and demonstration.
