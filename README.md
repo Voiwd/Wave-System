@@ -1,12 +1,19 @@
-# Wave-System
+# 🌊 WaveSim
 
-**Wave-System** is a study project focused on wave simulation using **Godot**, **JavaScript**, and **WebGL**.
+**WaveSim** is a real-time 3D wave simulation built for interactive demonstrations.
+
+### [👉 Click here to test it live!](https://voiwd-waves.vercel.app/)
+
+## Stacks
+
+- **Godot** : 3D Engine
+- **JavaScript** : Backend
+- **Vercel** : Hosting
 
 ## Goals
 
-- Explore physics and dynamic interactions  
-- Experiment with **shaders**
-- Practice web development and deploying interactive projects  
-- Keep a detailed development log (**dev log**)  
+- Study physics and graphics programming  
+- Study web development and deploying interactive projects  
+- Write documentation about the process
 
-> ⚠️ This project is still experimental and not a final product. It's meant for learning and experimentation.
+> ⚠️ This project is still experimental and not a final product. It's meant for learning and demonstration.
