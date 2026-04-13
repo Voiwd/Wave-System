@@ -3,7 +3,7 @@
 
 ![Demo](docs/Images/demo.gif)
 
-### [👉 Click here to test it live!](https://voiwd-waves.vercel.app/)
+### [👉 Click here to test it live!](https://voiwd-waves-godot.vercel.app/)
 
 ## Stacks
 
