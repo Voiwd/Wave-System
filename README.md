@@ -1,6 +1,7 @@
 # 🌊 WaveSim
-
 **WaveSim** is a real-time 3D wave simulation built for interactive demonstrations.
+
+![Demo](docs/Images/demo.gif)
 
 ### [👉 Click here to test it live!](https://voiwd-waves.vercel.app/)
 
